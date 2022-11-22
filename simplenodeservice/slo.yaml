@@ -6,8 +6,26 @@ comparison:
     number_of_comparison_results: 1
     aggregate_function: avg
 objectives:
-    - sli: host_cpu_usage
-      displayName: Host CPU usage
+    - sli: process_cpu
+      displayName: ""
+      pass:
+        - criteria:
+            - <20
+      warning:
+        - criteria:
+            - <50
+      weight: 1
+      key_sli: false
+    - sli: svc_fr
+      displayName: ""
+      pass:
+        - criteria:
+            - <2
+      warning: []
+      weight: 1
+      key_sli: false
+    - sli: host_cpu
+      displayName: ""
       pass:
         - criteria:
             - <40
@@ -16,32 +34,18 @@ objectives:
             - '>35'
       weight: 2
       key_sli: true
-    - sli: response_time_(p95)
-      displayName: Response time (P95)
+    - sli: host_mem
+      displayName: ""
       pass:
         - criteria:
-            - <600
-      warning: []
-      weight: 1
-      key_sli: false
-    - sli: response_time_(p90)
-      displayName: Response time (P90)
-      pass:
+            - <30
+      warning:
         - criteria:
-            - <550
-      warning: []
-      weight: 1
-      key_sli: false
-    - sli: response_time_(p50)
-      displayName: Response time (P50)
-      pass:
-        - criteria:
-            - <500
-      warning: []
-      weight: 1
-      key_sli: false
+            - '>25'
+      weight: 2
+      key_sli: true
     - sli: process_memory
-      displayName: Process Memory
+      displayName: ""
       pass:
         - criteria:
             - <20
@@ -50,18 +54,8 @@ objectives:
             - <50
       weight: 1
       key_sli: false
-    - sli: host_memory_usage
-      displayName: Host Memory usage
-      pass:
-        - criteria:
-            - <50
-      warning:
-        - criteria:
-            - '>35'
-      weight: 4
-      key_sli: true
-    - sli: api_invoke
-      displayName: API Invoke
+    - sli: api_invoke_rt
+      displayName: ""
       pass:
         - criteria:
             - <500
@@ -69,24 +63,31 @@ objectives:
       warning:
         - criteria:
             - <=400
+            - <=+20%
       weight: 2
       key_sli: false
-    - sli: failure_rate_(<_2)
-      displayName: Failure Rate (< 2)
+    - sli: svc_rt_p95
+      displayName: ""
       pass:
         - criteria:
-            - <2
+            - <600
       warning: []
       weight: 1
       key_sli: false
-    - sli: process_cpu_usage
-      displayName: Process CPU usage
+    - sli: svc_rt_p90
+      displayName: ""
       pass:
         - criteria:
-            - <20
-      warning:
+            - <550
+      warning: []
+      weight: 1
+      key_sli: false
+    - sli: svc_rt_p50
+      displayName: ""
+      pass:
         - criteria:
-            - <50
+            - <500
+      warning: []
       weight: 1
       key_sli: false
 total_score:
