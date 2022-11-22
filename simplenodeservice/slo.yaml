@@ -1,0 +1,95 @@
+spec_version: ""
+filter: {}
+comparison:
+    compare_with: single_result
+    include_result_with_score: pass
+    number_of_comparison_results: 1
+    aggregate_function: avg
+objectives:
+    - sli: process_cpu
+      displayName: ""
+      pass:
+        - criteria:
+            - <20
+      warning:
+        - criteria:
+            - <50
+      weight: 1
+      key_sli: false
+    - sli: svc_fr
+      displayName: ""
+      pass:
+        - criteria:
+            - <2
+      warning: []
+      weight: 1
+      key_sli: false
+    - sli: host_cpu
+      displayName: ""
+      pass:
+        - criteria:
+            - <40
+      warning:
+        - criteria:
+            - '>35'
+      weight: 2
+      key_sli: true
+    - sli: host_mem
+      displayName: ""
+      pass:
+        - criteria:
+            - <30
+      warning:
+        - criteria:
+            - '>25'
+      weight: 2
+      key_sli: true
+    - sli: process_memory
+      displayName: ""
+      pass:
+        - criteria:
+            - <20
+      warning:
+        - criteria:
+            - <50
+      weight: 1
+      key_sli: false
+    - sli: api_invoke_rt
+      displayName: ""
+      pass:
+        - criteria:
+            - <500
+            - <=+10%
+      warning:
+        - criteria:
+            - <=400
+            - <=+20%
+      weight: 2
+      key_sli: false
+    - sli: svc_rt_p95
+      displayName: ""
+      pass:
+        - criteria:
+            - <600
+      warning: []
+      weight: 1
+      key_sli: false
+    - sli: svc_rt_p90
+      displayName: ""
+      pass:
+        - criteria:
+            - <550
+      warning: []
+      weight: 1
+      key_sli: false
+    - sli: svc_rt_p50
+      displayName: ""
+      pass:
+        - criteria:
+            - <500
+      warning: []
+      weight: 1
+      key_sli: false
+total_score:
+    pass: 90%
+    warning: 75%
